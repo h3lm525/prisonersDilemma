@@ -1,0 +1,95 @@
+#! python 3.x
+#Game of Prisoner's Dilemma with CPU.
+
+import random
+import time
+#Define available choices for later use.
+aChoices = ('confess', 'deny')
+
+#Player and Computer Names
+your_name = input('Enter Your name: ')
+partner_name = input('Enter Partners name: ')
+
+#Game Explanation
+def welcome():
+    print("Welcome to the Prisoner's Dilemma.")
+    time.sleep(1)
+    print("In this game,", your_name, "and", partner_name, 'have been arrested.\n')
+    time.sleep(1)
+    print(your_name, 'and', partner_name, 'are being interrogated in separate cells.')
+    time.sleep(1)
+    print('Both are offered a deal by police.\n')
+    time.sleep(1)
+    print('If', your_name,'confesses and', partner_name, 'denies,')
+    time.sleep(1)
+    print(your_name, 'serves 10 years and', partner_name,'goes free.\n')
+    time.sleep(1)
+    print('If', partner_name, 'confesses and', your_name, 'denies,')
+    time.sleep(1)
+    print(partner_name, 'serves ten years and', your_name, 'goes free.\n')
+    time.sleep(1)
+    print('If both confess, both serve 6 years.\n')
+    time.sleep(1)
+    print('If both deny, both serve 6 months.\n')
+    time.sleep(1)
+
+
+#Call Game Explanation
+welcome()
+
+
+#Play game
+def game():
+#Define Variables for use in player choices
+    your_choice = input('Choose to confess or deny: ')
+    your_choice = your_choice.lower()
+    
+
+    #Error Trap
+    while not (your_choice in aChoices):
+        print('Invalid Answer.  Choose to confess or deny:')
+        your_choice = input()
+
+    #Generate Computer Choice
+    comp_choice = ['confess', 'deny']
+    partner_choice = random.choice(comp_choice)
+    
+    #Create possible scenarios generated from player
+    #and computer choices.
+    if your_choice == 'confess' and partner_choice == 'deny':
+        print(your_name, 'confessed and', partner_name,'denied.')
+        time.sleep(1)
+        print(your_name, 'gets 10 years', partner_name, 'goes free.\n')
+        time.sleep(1)
+
+    elif your_choice == 'confess' and partner_choice == 'confess':
+        print(your_name, 'and', partner_name, 'both confessed.')
+        time.sleep(1)
+        print('Both get 6 years.\n')
+        time.sleep(1)
+
+    elif your_choice == 'deny' and partner_choice == 'confess':
+        print(your_name, 'denied and', partner_name,'confessed.')
+        time.sleep(1)
+        print(your_name, 'goes free,', partner_name, 'gets 10 years.\n')
+        time.sleep(1)
+
+    elif your_choice == 'deny' and partner_choice == 'deny':
+        print(your_name, 'and', partner_name, 'both denied.')
+        time.sleep(1)
+        print('Both get 6 months.\n')
+        time.sleep(1)
+
+game()    
+
+
+#loop game function
+while True:
+    
+    keep_going = input('To keep playing, type yes, otherwise type anything else: \n')
+    keep_going = keep_going.lower()
+    if keep_going == 'yes':
+        game()
+    else:
+        print('Thanks for playing. Goodbye!')
+        break
